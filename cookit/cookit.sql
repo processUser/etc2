@@ -1,0 +1,14 @@
+
+CREATE TABLE cookit_user(
+   userpk INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+   email VARCHAR(50) UNIQUE NOT NULL,
+   pw VARCHAR(500) NOT NULL,
+   nm VARCHAR(5) NOT NULL,
+   gender TINYINT UNSIGNED NOT NULL CHECK(gender IN (1, 2, 3)),
+   birthdaymm VARCHAR(2) NOT NULL CHECK(birthdaymm >= 01 AND birthdaymm <= 09),
+   birthdaydd VARCHAR(2) NOT NULL CHECK(birthdaydd >= 01 AND birthdaydd <= 31),
+   rdt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	ldt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	joinpath INT UNSIGNED NOT NULL CHECK(joinpath >= 1),
+	deluser TINYINT NOT NULL DEFAULT 0 CHECK(deluser >= 0 AND deluser <= 1) 
+);
