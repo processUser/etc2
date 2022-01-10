@@ -5,6 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDTO extends UserVo { // db 조회에 이용할 값을 담는 곳
+public class UserDTO extends UserEntity { // db 조회에 이용할 값을 담는 곳
+    public String genderstr;
     public String birthday;
+
 }

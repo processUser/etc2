@@ -1,8 +1,10 @@
 package org.iptime.mpage;
 
 import org.iptime.mpage.user.model.UserDTO;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,10 +46,36 @@ public class Utils {
     }
 
     //생일값 월일 분리
-    public static void splitBirthday(UserDTO dto, String str) {
-        String[] strAry = str.split("-");
+    public static void splitBirthday(UserDTO dto, String birthday) {
+        String[] strAry = birthday.split("-");
         dto.setBirthdaymm(strAry[0]);
         dto.setBirthdaydd(strAry[1]);
     }
 
+    //비밀번호 암호화
+    public static void hashPw(UserDTO dto, String pw){
+        dto.setPw(BCrypt.hashpw(pw, BCrypt.gensalt()));
+    }
+
+    //성별 정수
+    public static void strTogender(UserDTO dto, String gender) {
+        switch (gender){
+            case "M":
+                dto.setGender(1);
+                break;
+            case "F":
+                dto.setGender(2);
+                break;
+            default:
+                dto.setGender(0);
+                break;
+        }
+    }
+
+    //세션에 값 담기
+    public static void setSession(HttpServletRequest req, UserDTO dto){
+        dto.setPw("");
+        HttpSession session = req.getSession();
+        session.setAttribute("loginUser", dto);
+    }
 }
