@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>네이버 로그인</title>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+</head>
+<body>
+  <!-- 네이버 로그인 버튼 노출 영역 -->
+    <form id="formWarp">
+      <div><input type="text" name="email" placeholder="email" value="aaaa"></div>
+      <div><input type="text" name="pw" placeholder="pw" value="aaaa"></div>
+      <div><input type="button" id="submit" value="JOIN"></div>
+  </form>
+  <div id="naver_id_login"></div>
+  <!-- //네이버 로그인 버튼 노출 영역 -->
+  <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("k8cnRfEmk36R8WL53bbW", "http://127.0.0.1:5500/callback.html");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("green", 3, 40);
+  	naver_id_login.setDomain(".127.0.0.1:5500");
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+  </script>
+
+<script>
+  let formElem = document.querySelector('#formWarp');
+  let submitElem = formElem.querySelector('#submit');
+  submitElem.addEventListener('click', (e) => {
+      let login = new Object();
+      login.email = formElem.email.value;
+      login.pw = formElem.pw.value;
+      
+      let jsonLogin = JSON.stringify(login);
+      console.log(jsonLogin);
+      insLogin(jsonLogin)
+      e.preventDefault;
+  })
+  
+
+  function insLogin(jsonLogin){
+      let url = "http://localhost:8100/login"    
+      fetch(url,{
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: jsonLogin,
+      }).then((res) => {
+          return res.json();
+      }).then((data) => {
+          console.log(data);
+          goLogin(data);
+      }).catch((e) => {
+          console.log(e);
+      })
+  }
+
+  function goLogin(aa) {
+      let joinUser = aa
+      if(joinUser.result){
+          location.href ="/index.html"
+      }
+      console.log(joinUser.msg);
+  }
+</script>
+</html>
