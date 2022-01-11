@@ -31,8 +31,9 @@ public class TestJWT {
         //payload 부분 설정
         Map<String, Object> payloads = new HashMap<>();
         payloads.put("data", "My JWT");
+        payloads.put("nm", "고길동");
 
-        Long expiredTime = 1000 * 60L * 60L * 2L; // 토큰 유효 시간 (2시간)
+        Long expiredTime = 1000 * 60L; // 1000 * 60L * 60L * 2L 토큰 유효 시간 (2시간)
 
         Date ext = new Date(); // 토큰 만료 시간
         ext.setTime(ext.getTime() + expiredTime);
@@ -43,7 +44,7 @@ public class TestJWT {
                 .setClaims(payloads) // Claims 설정
                 .setSubject("user") // 토큰 용도
                 .setExpiration(ext) // 토큰 만료 시간 설정
-                .signWith(SignatureAlgorithm.HS256, KEY.getBytes("utf-8")) // HS256과 Key로 Sign
+                .signWith(SignatureAlgorithm.HS256, KEY.getBytes("UTF-8")) // HS256과 Key로 Sign
                 .compact(); // 토큰 생성
 
         return jwt;
@@ -79,8 +80,19 @@ public class TestJWT {
         return claimMap;
     }
 }
-// 참고 - https://velog.io/@carrykim/%EC%8B%A4%EC%8A%B5-JWT-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-with-Java
-// 참고 - https://bamdule.tistory.com/123
-// 참고 - https://mangkyu.tistory.com/56
-// 참고 - https://idlecomputer.tistory.com/240?category=766105
-//https://ksshlee.github.io/spring/java/jwt/
+/*
+jwt access token refresh token
+ https://github.com/jwtk/jjwt
+ https://archijude.tistory.com/432 //js 로 헤더 값 가져오는 방법
+ https://developer.mozilla.org/en-US/docs/Web/API/atob // base64 인코딩 디코딩
+ https://okky.kr/article/703255 // 헤더에 정보값을 못가져올때
+ https://escapefromcoding.tistory.com/255
+ https://zlcjfalsvk.github.io/java/jwt/
+ https://kunkunwoo.tistory.com/211
+ https://tansfil.tistory.com/59?category=475681
+ 참고 - https://velog.io/@carrykim/%EC%8B%A4%EC%8A%B5-JWT-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-with-Java
+ 참고 - https://bamdule.tistory.com/123
+ 참고 - https://mangkyu.tistory.com/56
+ 참고 - https://idlecomputer.tistory.com/240?category=766105
+https://ksshlee.github.io/spring/java/jwt/
+ */
