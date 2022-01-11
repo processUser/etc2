@@ -1,6 +1,7 @@
 package org.iptime.mpage;
 
 import org.iptime.mpage.user.model.UserDTO;
+import org.iptime.mpage.user.model.UserVo;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +57,9 @@ public class Utils {
     public static void hashPw(UserDTO dto, String pw){
         dto.setPw(BCrypt.hashpw(pw, BCrypt.gensalt()));
     }
-
+    public static boolean checkPw(String pw, UserVo vo) {
+        return BCrypt.checkpw(pw, vo.getPw());
+    }
     //성별 정수
     public static void strTogender(UserDTO dto, String gender) {
         switch (gender){
@@ -73,9 +76,10 @@ public class Utils {
     }
 
     //세션에 값 담기
-    public static void setSession(HttpServletRequest req, UserDTO dto){
-        dto.setPw("");
+    public static int setSession(HttpServletRequest req, UserVo vo){
+        vo.setPw("");
         HttpSession session = req.getSession();
-        session.setAttribute("loginUser", dto);
+        session.setAttribute("loginUser", vo);
+        return 1;
     }
 }

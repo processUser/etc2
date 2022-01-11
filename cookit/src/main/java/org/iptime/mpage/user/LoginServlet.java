@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import org.iptime.mpage.DAO.UserDAO;
 import org.iptime.mpage.Utils;
 import org.iptime.mpage.user.model.UserDTO;
+import org.iptime.mpage.user.model.UserResult;
 import org.iptime.mpage.user.model.UserVo;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +19,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/snslogin")
+@WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -31,35 +33,31 @@ public class LoginServlet extends HttpServlet {
 
         Gson gson = new Gson();
         UserDTO dto = gson.fromJson(json, UserDTO.class);
-
-        if(dto.getJoinpath() != 1 && UserDAO.checkEmail(dto)){ // 있으면 false 없으면 /true
-
-            if(dto.getPw() == null){
-                int randomPw = (int)((Math.random()+1)*1000000);
-                dto.setPw("@"+randomPw+"!");
-            }
-            Utils.hashPw(dto, dto.getPw());
-            Utils.strTogender(dto,dto.getGenderstr());
-            Utils.splitBirthday(dto,dto.getBirthday());
-
-            int result = UserDAO.insUser(dto); // 성공 1
-
-            Map<String, Integer> map = new HashMap<>();
-            map.put("result", result);
-            System.out.println(gson.toJson(map));
-
-            String resjson = gson.toJson(map);
-
-            res.setContentType("text/plain;charset=UTF-8");
-            res.setCharacterEncoding("UTF-8");
-
-            PrintWriter out = res.getWriter();
-            out.println(resjson);
-
-        }
-
+        String pw = dto.getPw();
+        //------------------------------------
+        Utils.hashPw(dto, pw);
         UserVo vo = UserDAO.loginUser(dto);
-        
+        int result = 0; // 로그인 실패 (아이디 비밀번호 확인 메세지)
+        if(vo != null) {
+            if(Utils.checkPw(pw, vo)) {
+                // 로그인성공
+                result = Utils.setSession(req, vo); // 성공 1
+            }
+        }
+        //------------------------------------
+        UserResult us = new UserResult();
+        us.setResult(result);
+        if (result == 0) {
+            us.setMsg("아이디 비밀번호를 확인 하세요");
+        }
+        System.out.println(gson.toJson(us));
+        String resjson = gson.toJson(us);
+
+        res.setContentType("text/plain;charset=UTF-8");
+        res.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = res.getWriter();
+        out.println(resjson);
 
     }
 }

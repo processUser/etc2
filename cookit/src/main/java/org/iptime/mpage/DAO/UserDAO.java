@@ -41,7 +41,7 @@ public class UserDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select userpk, email, nm, joinpath from cookit_user where email = ?";
+        String sql = "select userpk, email, pw, nm, joinpath from cookit_user where email = ?";
 
         try {
             con = DbUtils.getCon();
@@ -53,6 +53,7 @@ public class UserDAO {
                 UserVo vo = new UserVo();
                 vo.setUserpk(rs.getInt("userpk"));
                 vo.setEmail(rs.getString("email"));
+                vo.setPw(rs.getString("pw"));
                 vo.setNm(rs.getString("nm"));
                 vo.setJoinpath(rs.getInt("joinpath"));
 
