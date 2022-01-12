@@ -1,6 +1,7 @@
 package org.iptime.mpage.user;
 
 import com.google.gson.Gson;
+import org.iptime.mpage.Cookies;
 import org.iptime.mpage.DAO.UserDAO;
 import org.iptime.mpage.TestJWT;
 import org.iptime.mpage.Utils;
@@ -52,18 +53,27 @@ public class LoginServlet extends HttpServlet {
         if (result == 0) {
             us.setMsg("아이디 비밀번호를 확인 하세요");
         }
-        TestJWT testjwt = new TestJWT();
-        System.out.println(gson.toJson(us));
+
+
+
         String resjson = gson.toJson(us);
+        System.out.println(gson.toJson(us));
 
         res.setContentType("text/plain;charset=UTF-8");
         res.setCharacterEncoding("UTF-8");
         PrintWriter out = res.getWriter();
         out.println(resjson);
         try {
+            TestJWT testjwt = new TestJWT();
             String jwt = testjwt.createToken();
             res.setHeader("Authorization", "Bearer "+jwt);
             System.out.println(jwt);
+
+            //------------------------------------
+            //cookie 저장
+            Cookies.setCookie(res, jwt);
+            //------------------------------------
+
             //out.println();
         } catch (Exception e){
             e.printStackTrace();

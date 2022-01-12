@@ -19,6 +19,7 @@
     </form>
 
     <script>
+        // 회원가입 JSON 생성
         let formElem = document.querySelector('#formWarp');
         let submitElem = formElem.querySelector('#submit');
         submitElem.addEventListener('click', (e) => {
@@ -37,7 +38,7 @@
             e.preventDefault;
         })
         
-
+        // 회원가입 실행
         function insLogin(jsonLogin){
             let url = "http://localhost:8100/join"    
             fetch(url,{
@@ -56,6 +57,7 @@
             })
         }
 
+        // 성공시 로그인 페이지 이동
         function goLogin(aa) {
             let joinUser = aa
             if(joinUser.result){

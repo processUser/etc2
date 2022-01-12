@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+// JWT 생성
 public class TestJWT {
     //암호화 키
     private final String KEY = "cookit_Test_Secret_Key";
@@ -18,6 +19,7 @@ public class TestJWT {
 
         Map<String, Object> claimMap = testJWT.verifyJWT(jwt);
         System.out.println(claimMap); // 토큰이 만료되었거나 문제가있으면 null
+
     }
 
     //토큰 생성
@@ -41,8 +43,8 @@ public class TestJWT {
         // 토큰 Builder
         String jwt = Jwts.builder()
                 .setHeader(headers) // Headers 설정
-                .setClaims(payloads) // Claims 설정
-                .setSubject("user") // 토큰 용도
+                .setClaims(payloads) // Claims 설정, Token에 담을 정보
+                .setSubject("user") // 토큰 용도, Token 제목
                 .setExpiration(ext) // 토큰 만료 시간 설정
                 .signWith(SignatureAlgorithm.HS256, KEY.getBytes("UTF-8")) // HS256과 Key로 Sign
                 .compact(); // 토큰 생성
@@ -83,6 +85,7 @@ public class TestJWT {
 /*
 jwt access token refresh token
  https://github.com/jwtk/jjwt
+ https://galid1.tistory.com/588 - 참고하면 괜찮을 듯
  https://archijude.tistory.com/432 //js 로 헤더 값 가져오는 방법
  https://developer.mozilla.org/en-US/docs/Web/API/atob // base64 인코딩 디코딩
  https://okky.kr/article/703255 // 헤더에 정보값을 못가져올때
