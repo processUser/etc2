@@ -25,7 +25,7 @@ CREATE TABLE cookit_user(
    rdt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
    ldt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
    joinpath TINYINT UNSIGNED NOT NULL CHECK(joinpath >= 0),
-   deluser TINYINT NOT NULL DEFAULT 0 CHECK(deluser >= 0 AND deluser <= 1) 
+   deluser TINYINT UNSIGNED NOT NULL DEFAULT 0 CHECK(deluser >= 0 AND deluser <= 1)
 );
 
 -- 상품 테이블
@@ -33,18 +33,46 @@ CREATE TABLE cookit_user(
 	상품 Db
 	goodspk - 상품 pk ( select 시 문자가 있다면 속도차이 발생(양이 많은경우 해당)
 	gnum - 상품코드(문자4자리+숫자3 ~ 4자리)
+	categorypk - 카테고리 pk
 	gnm - 상품명
 	price - 가격
-	quantity - 보유 수량
+	quantity	- 보유 수량
 	rdt - 등록일
 	isdel - 삭제
 */
-CREATE TABLE goods(
+CREATE TABLE cookit_goods(
 	goodspk INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	gnum VARCHAR(8) NOT NULL,
+	gnum VARCHAR(8) UNIQUE NOT NULL,
+	categorypk INT UNSIGNED,
 	gnm VARCHAR(50) NOT NULL,
-	price INT UNSIGNED DEFAULT 0,
-	quantity TINYINT UNSIGNED DEFAULT 0,
-	rdt DATETIME,
+	price INT UNSIGNED NOT NULL DEFAULT 0,
+	quantity TINYINT UNSIGNED NOT NULL DEFAULT 0,
+	rdt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
 	isdel TINYINT UNSIGNED DEFAULT 0
+);
+
+-- 상품 카테고리 테이블
+/*
+	상품 category Db
+	gcategorypk - 카테고리 pk
+	categorynm - 카테고리 이름
+*/
+CREATE TABLE cookit_goods_category(
+	categorypk INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	categorynm VARCHAR(10) NOT NULL,
+);
+
+-- 상품 이미지 테이블
+/*
+	상품 image Db
+	imgpk - 이미지 pk
+	goodspk - 해당상품
+	img - 이미지 명
+	defaultimage - 메인되는 기본 이미지 설정
+*/
+CREATE TABLE cookit_goods_image (
+	imgpk INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	goodspk INT UNSIGNED NOT NULL,
+	img VARCHAR(50),
+	defaultimage TINYINT UNSIGNED
 );
