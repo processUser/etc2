@@ -27,6 +27,20 @@ CREATE TABLE cookit_user(
    joinpath TINYINT UNSIGNED NOT NULL CHECK(joinpath >= 0),
    deluser TINYINT UNSIGNED NOT NULL DEFAULT 0 CHECK(deluser >= 0 AND deluser <= 1)
 );
+-- 배송지 테이블
+/*
+	shipping address Db
+	addresspk - 배송지 pk
+	a - 받는사람
+	b - 주소
+	c - 연락처
+	d - 기본배송지 설정
+	userpk - 회원 pk
+	
+*/
+CREATE TABLE cookit_shipping_address(
+	addresspk INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+);
 
 -- 상품 테이블
 /*
