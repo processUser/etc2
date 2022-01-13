@@ -1,5 +1,19 @@
 -- 사용자 테이블 
-
+/*
+   회원정보 Db
+   userpk - 회원 pk
+   email - 이메일 (id 기능 겸용)
+   pw - 비밀번호
+   nm - 이름
+   gender - 성별 1- 남, 2- 여, 3- 선택안함
+   birthdaymm - 생일 (월) 01 ~ 09 값 중 입력가능
+   birthdaydd - 생일 (일) 01 ~ 31 값 중 입력가능
+   rdt - 가입일
+   ldt - 마지막 로그인 일
+   joinpath - 회원가입 경로 0- 관리자 but 0 설정 막기,  1- 홈페이지, 2- 네이버, etc
+              지정 경로 이외의 값 ex) 0 이 넘어오면 가입 거절
+   deluser - 삭제여부 정상유지- 0, 삭제- 1 
+*/
 CREATE TABLE cookit_user(
    userpk INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
    email VARCHAR(50) UNIQUE NOT NULL,
@@ -10,7 +24,7 @@ CREATE TABLE cookit_user(
    birthdaydd VARCHAR(2) NOT NULL CHECK(birthdaydd >= 01 AND birthdaydd <= 31),
    rdt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
    ldt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-   joinpath INT UNSIGNED NOT NULL CHECK(joinpath >= 1),
+   joinpath TINYINT UNSIGNED NOT NULL CHECK(joinpath >= 0),
    deluser TINYINT NOT NULL DEFAULT 0 CHECK(deluser >= 0 AND deluser <= 1) 
 );
 
@@ -21,9 +35,9 @@ CREATE TABLE cookit_user(
 	gnum - 상품코드(문자4자리+숫자3 ~ 4자리)
 	gnm - 상품명
 	price - 가격
-	quantity	- 보유 수량
+	quantity - 보유 수량
 	rdt - 등록일
-	isdel - 삭제zetc
+	isdel - 삭제
 */
 CREATE TABLE goods(
 	goodspk INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
