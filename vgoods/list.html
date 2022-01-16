@@ -5,10 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #listwarp{
+            display: grid;
+            grid-template-columns: repeat(4, 150px);
+        }
+    </style>
 </head>
 <body>
+    <article>
+        <img src="http://placehold.it/150x150" alt="이미지">
+        <div>
+            <span>2인분</span>
+            <span>조리시간</span>
+        </div>
+        <p>제품명</p>
+        <p>가격</p>
+        <div>
+            <span>별점</span>
+            <span>리뷰</span>
+        </div>
+        <div>
+            <span>찜하기</span>
+            <span>장바구니</span>
+        </div>
+    </article>
+    <hr>
+    <div id="listwarp">
+
+    </div>
     <script>
-        fetch('http://localhost:8100/goodslist',{
+        fetch('http://localhost:8090/goodslist',{
             'method': 'post',
             'headers': {'Content-Type': 'application/json'},
             'body': JSON.stringify({
@@ -22,14 +49,48 @@
             })
             .catch(e => {console.log(e);});
 
-
+            //http://placehold.it/150x150 - 이미지 대체
 
             function goodsList(data) {
-                // let jsonlist = Object.keys(data['list']);
+                let jsonlist = data.list;
+                
+                const listwarpElem = document.getElementById('listwarp');
+                jsonlist.forEach((items) => {  // 전체 수 만큼 반복.
+                    console.log('items : ' + items)
+                    const articleElem = document.createElement('article');
+                    const imgElem = document.createElement('img');
+                    const divElem = document.createElement('div');
+                    const spanElem1 = document.createElement('span');
+                    const spanElem2 = document.createElement('span');
+                    const pElem1 = document.createElement('p');
+                    const pElem2 = document.createElement('p');
+                    
+                    imgElem.src = 'http://placehold.it/150x150'
+                    imgElem.alt = "사진"
+
+                    pElem1.innerText = items.gnm;
+                    pElem1.dataset.gnum = items.gnum;
+                    pElem2.innerText = items.price;
+
+                    spanElem1.innerText = items.avgscore;
+                    spanElem2.innerText = '리뷰 ' + items.countscore;
+                    spanElem2.style.marginLeft = '15px'
+
+                    listwarpElem.append(articleElem);
+                    articleElem.append(imgElem)
+                    articleElem.append(pElem1)
+                    articleElem.append(pElem2)
+                    articleElem.append(divElem)
+                    divElem.append(spanElem1);
+                    divElem.append(spanElem2);
+                });
+                console.log(data.list);
+                /*
                 let jsonlist = data.list[1];
                 for(var val in jsonlist) {
                     console.log(jsonlist[val]);
                 }
+                */
             }
     </script>
     

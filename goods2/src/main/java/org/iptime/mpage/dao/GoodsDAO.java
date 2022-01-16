@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsDAO {
-
+    // 상품 전체 조회
+    // 상품 카테고리별 전체 조회
     public static List<GoodsVo> selGoodsList (GoodsEntity entity) {
         List<GoodsVo> list = new ArrayList<>();
 

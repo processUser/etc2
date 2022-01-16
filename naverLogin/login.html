@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>네이버 로그인</title>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
+
+</head>
+<body>
+
+    
+    <form id="formWarp">
+        <div><input type="text" name="email" placeholder="email" value="aaaa"></div>
+        <div><input type="text" name="pw" placeholder="pw" value="aaaa"></div>
+        <div><input type="button" id="submit" value="JOIN"></div>
+    </form>
+    <!-- 네이버 로그인 버튼 노출 영역 -->
+    <div id="naver_id_login"></div>
+    <img src="http://localhost:8090/login" alt="">
+    <!-- 네이버 로그인 버튼 script -->
+    <script type="text/javascript">
+        var naver_id_login = new naver_id_login("k8cnRfEmk36R8WL53bbW", "http://127.0.0.1:5500/callback.html");
+        var state = naver_id_login.getUniqState();
+        naver_id_login.setButton("green", 3, 40);
+        naver_id_login.setDomain(".127.0.0.1:5500");
+        naver_id_login.setState(state);
+        naver_id_login.setPopup();
+        naver_id_login.init_naver_id_login();
+    </script>
+
+    <script>
+        // 홈페이지 로그인 처리 JSON 객체 생성
+        let formElem = document.querySelector('#formWarp');
+        let submitElem = formElem.querySelector('#submit');
+        submitElem.addEventListener('click', (e) => {
+            let login = new Object();
+            login.email = formElem.email.value;
+            login.pw = formElem.pw.value;
+            
+            let jsonLogin = JSON.stringify(login);
+            //console.log(jsonLogin);
+            insLogin(jsonLogin)
+            e.preventDefault;
+        })
+    
+        // 홈페이지 로그인 처리 
+        function insLogin(jsonLogin){
+            let url = "http://localhost:8090/login"    
+            fetch(url,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: jsonLogin,
+                // credentials: 'include',
+            }).then((response) => {
+                console.log(response.headers.get('Authorization'))
+                // refresh token 가저오기
+                // ajax 는 document.cookie 가 안됨..
+                console.log('res - join - response.cookie : ' + response.headers.get('setcookie')) 
+                setTimeout(sendToken, 2000, response.headers.get('setcookie'));
+                getToken(response.headers.get('Authorization'))
+                return response.json();
+            }).then((data) => {
+                //console.log(data);
+                goLogin(data);
+            }).catch((e) => {
+                console.log(e);
+            })
+            
+
+        }
+        
+        // 로그인 성공시 페이지 이동
+        function goLogin(aa) {
+            let joinUser = aa
+            if(joinUser.result){
+                location.href ="/index.html"
+            }
+            //console.log(joinUser.msg);
+        }
+
+        // JWT access token 가져오기
+        // response 헤더에 Authorization 이곳에 담겨있다.
+        function getToken(token) {
+            var tokens =token 
+            var base64Payload = encodeURIComponent(tokens.split('.')[1]); //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE 
+            var payload = decodeURIComponent(escape(window.atob(base64Payload))); // 한글깨짐 해결 - https://developer.mozilla.org/en-US/docs/Glossary/Base64
+            var result = JSON.parse(payload.toString()) 
+            //console.log(result);
+            // 토큰 테스트 용도
+            // setTimeout(useToken, 2000, tokens);
+            //document.cookie = `token = ${tokens.substr(6)}`
+            setTimeout(sendToken, 2000, tokens);
+            // setTimeout(useToken, 65000, tokens);
+        }
+
+        function useToken(data) {
+            //console.log("65000")
+            //console.log("tokens"+data.substr(6))
+            let url = "http://localhost:8090/checktoken"    
+            fetch(url,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "token" : data.substr(6)
+                }),
+            }).then((response) => {  
+                //console.log(response)  
+            }).then((data) => {
+                //console.log('checktoken : '+ data);
+            }).catch((e) => {
+                console.log(e);
+            })
+            //console.log('document.cookie : ' + document.cookie) // ajax에서는 안됨.
+        }
+
+        function sendToken(tokens) {
+            //console.log("65000")
+            console.log("----------sendToken---------------")
+            let url = "http://localhost:8090/refreshtoken"    
+            fetch(url,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "token" : tokens
+                }),
+                // credentials: 'include',
+            }).then((response) => {  
+                //console.log(response)  
+            }).then((data) => {
+                //console.log('checktoken : '+ data);
+            }).catch((e) => {
+                console.log(e);
+            })
+            //console.log('document.cookie : ' + document.cookie) // ajax에서는 안됨.
+        }
+    </script>
+</body>
+</html>

@@ -3,6 +3,7 @@ package org.iptime.mpage.goods;
 import com.google.gson.Gson;
 import org.iptime.mpage.Json;
 import org.iptime.mpage.dao.GoodsDAO;
+import org.iptime.mpage.dao.ReviewDAO;
 import org.iptime.mpage.goods.model.GoodsEntity;
 import org.iptime.mpage.goods.model.GoodsVo;
 
@@ -33,8 +34,14 @@ public class GoodsListServlet extends HttpServlet {
 
         List<GoodsVo> list = GoodsDAO.selGoodsList(entity);
 
-        Map<String, List<GoodsVo>> map = new HashMap<>();
+        //System.out.println("ReviewDAO.selAvg(list.get(i)" + ReviewDAO.selAvg(list.get(1)));
+        for(int i = 0; i< list.size(); i++){ // 상품별 리뷰 총 평균, 총 갯수
+            ReviewDAO.selAvg(list.get(i));
+        }
+
+        Map<String, Object> map = new HashMap<>();
         map.put("list", list);
+
 
 
         res.setContentType("text/plain;charset=UTF-8");

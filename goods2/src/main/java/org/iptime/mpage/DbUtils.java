@@ -4,9 +4,12 @@ import java.sql.*;
 
 public class DbUtils {
     public static Connection getCon() throws Exception {
-        final String URL = "jdbc:mysql://localhost:3308/zetc";
-        final String NAME = "root";
-        final String PASSWORD = "koreait";
+        final String URL = "jdbc:mysql://mpage.iptime.org:3306/cookit";
+        final String NAME = "cookit";
+        final String PASSWORD = "dbcookitpage";
+//        final String URL = "jdbc:mysql://localhost:3308/zetc";
+//        final String NAME = "root";
+//        final String PASSWORD = "koreait";
         final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
         Class.forName(DRIVER);

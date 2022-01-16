@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
+}
+
+/*  */
+#content{
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 8fr 1fr;
+    justify-content: center;
+}
+/* 헤더 */
+#header{
+    margin-top: 50px;
+}
+#header h1{
+    color: #BDD61A;
+    font-size: 65px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+}
+/* 세션 */
+#section{
+    padding: 65px 15px;
+}
+.labelWrap:not(:first-child){
+    margin-top: 25px;
+}
+label{
+    display: inline-block;
+    width: 150px;
+    font-size: 20px;
+}
+.labelWrap input, .labelWrap select{
+    padding: 5px;
+    font-size: 16px;
+}
+
+.labelWrap input:focus{
+    outline: none;
+}
+/* 푸터 */
+#footer{
+    border: 1px blue dotted;
+    
+}

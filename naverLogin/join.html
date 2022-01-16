@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="formWarp">
+        <div><input type="text" name="email" placeholder="email" value="aaaa"></div>
+        <div><input type="text" name="pw" placeholder="pw" value="aaaa"></div>
+        <div><input type="text" name="nm" placeholder="nm" value="aaaa"></div>
+        <div><input type="text" name="gender" placeholder="gender" value="1"></div>
+        <div><input type="text" name="birthdaymm" placeholder="월" value="1"></div>
+        <div><input type="text" name="birthdaydd" placeholder="일" value="1"></div>
+        <div><input type="text" name="joinpath" placeholder="joinpath" value="1"></div>
+        <div><input type="button" id="submit" value="JOIN"></div>
+    </form>
+
+    <script>
+        // 회원가입 JSON 생성
+        let formElem = document.querySelector('#formWarp');
+        let submitElem = formElem.querySelector('#submit');
+        submitElem.addEventListener('click', (e) => {
+            let login = new Object();
+            login.email = formElem.email.value;
+            login.pw = formElem.pw.value;
+            login.nm = formElem.nm.value;
+            login.gender = formElem.gender.value;
+            login.birthdaymm = formElem.birthdaymm.value;
+            login.birthdaydd = formElem.birthdaydd.value;
+            login.joinpath = formElem.joinpath.value;
+            
+            let jsonLogin = JSON.stringify(login);
+            console.log(jsonLogin);
+            insLogin(jsonLogin)
+            e.preventDefault;
+        })
+        
+        // 회원가입 실행
+        function insLogin(jsonLogin){
+            let url = "http://localhost:8100/join"    
+            fetch(url,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: jsonLogin,
+            }).then((res) => {
+                return res.json();
+            }).then((data) => {
+                console.log(data);
+                goLogin(data);
+            }).catch((e) => {
+                console.log(e);
+            })
+        }
+
+        // 성공시 로그인 페이지 이동
+        function goLogin(aa) {
+            let joinUser = aa
+            if(joinUser.result){
+                location.href ="/login.html"
+            }
+            console.log(aa);
+        }
+    </script>
+</body>
+</html>
