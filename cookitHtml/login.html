@@ -57,26 +57,26 @@
     </header>
 
     <!-- 내용 -->
-    <section>
+    <section id="sectionLogin">
         <h2>로그인</h2>
         <form action="./login.html" method="post">
-            <div>
-                <input type="text" name="uid" placeholder="아이디">
+            <div class="loginfrm1">
+                <input type="text" name="uid" placeholder="이메일">
                 <input type="password" placeholder="비밀번호">
             </div>
-            <div>
-                <label for=""><input type="checkbox" name="" id="">아이디 저장</label>
+            <div class="loginfrm2">
+                <label for="aa"><input type="checkbox" name="" id="aa">아이디 저장</label>
                 <span>
                     <a href="">아이디 / 비밀번호 찾기</a>
                     <a href="./agreeJoin.html">회원가입</a>
                 </span>
             </div>
-            <div>
+            <div class="loginfrm3">
                 <input type="submit" value="로그인">
             </div>
         </form>
-        <div>소셜 로그인 추가 예정</div>
-        <div id="naver_id_login"></div>
+        <!-- <div>소셜 로그인 추가 예정</div> -->
+        <div id="naver_id_login" class="snslogin1"></div>
     </section>
     
     <!-- 푸터 -->
@@ -154,7 +154,7 @@
     <script>
         var naver_id_login = new naver_id_login("k8cnRfEmk36R8WL53bbW", "http://127.0.0.1:5500/callback.html");
         var state = naver_id_login.getUniqState();
-        naver_id_login.setButton("green", 3,40); //네이버 로그인 버튼 설정
+        naver_id_login.setButton("green", 3, 45); //네이버 로그인 버튼 설정
         // cookie를 양쪽 domain에서 참조하기 위해서 상태 토큰 비교를 위한 domain 설정
         naver_id_login.setDomain(".127.0.0.1:5500");
         naver_id_login.setState(state);

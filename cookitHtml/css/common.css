@@ -13,7 +13,6 @@ li{
 }
 
 html, body{
-    max-width: 1920px;
     min-width: 1180px;
     height: 100%;
 }
