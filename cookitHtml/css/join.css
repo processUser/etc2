@@ -31,13 +31,18 @@ html, body{
     padding: 65px 15px;
 }
 
+#formWarp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .labelWrap:not(:first-child){
     margin-top: 40px;
 }
 .labelWrap input, .labelWrap select{
     padding: 5px 15px;
-    width: 550px;
+    width: 365px;
     border: 0;
     font-size: 22px;
     border-bottom: #BDD61A solid 1px;
@@ -54,16 +59,17 @@ select{
 }
 .joinBtnWrap{
     margin-top: 80px;
-    display: flex;
-    justify-content: space-evenly;
 }
 .joinBtnWrap > input {
     padding: 10px;
-    width: 200px;
+    width: 125px;
     background-color: #BDD61A;
     border: 0;
     font-size: 22px;
     color: #666666;
+}
+.joinBtnWrap > input:not(:first-child) {
+    margin-left: 35px;
 }
 .joinBtnWrap > input:hover{
     background-color: #a1b51f;
