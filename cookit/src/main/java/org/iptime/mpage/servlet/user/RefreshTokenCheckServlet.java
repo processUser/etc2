@@ -1,4 +1,4 @@
-package org.iptime.mpage.user;
+package org.iptime.mpage.servlet.user;
 
 import org.iptime.mpage.Cookies;
 

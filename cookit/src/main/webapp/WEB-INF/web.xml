@@ -14,17 +14,18 @@
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
+  <!-- cors Filter -->
+  <filter>
+    <filter-name>cors</filter-name>
+    <filter-class>org.iptime.mpage.CORSFilter</filter-class>
+  </filter>
 
   <filter-mapping>
     <filter-name>SetCharacterEncoding</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  <!-- cors Filter -->
-  <filter>
-    <filter-name>cors</filter-name>
-    <filter-class>org.iptime.mpage.CORSFilter</filter-class>
-  </filter>
+
   <filter-mapping>
     <filter-name>cors</filter-name>
     <url-pattern>/*</url-pattern>

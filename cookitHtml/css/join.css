@@ -47,6 +47,10 @@ html, body{
     font-size: 22px;
     border-bottom: #BDD61A solid 1px;
 }
+.labelWrap .errBorder{
+    border-bottom: 1px solid red;
+}
+
 .labelWrap input:focus{
     outline: none;
 }
@@ -83,7 +87,6 @@ label{
     font-size: 20px;
 }
 */
-
 
 /* 푸터 */
 #footer{

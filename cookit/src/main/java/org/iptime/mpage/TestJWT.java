@@ -2,28 +2,29 @@ package org.iptime.mpage;
 
 import io.jsonwebtoken.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+// TODO 어떻게 처리할지 고민필요
 // JWT 생성
 public class TestJWT {
-    //암호화 키
-    private final String KEY = "cookit_Test_Secret_Key";
+    public static void main(String[] args) throws java.io.UnsupportedEncodingException {
+        UUID uuid = UUID.randomUUID();
+        uuid.toString().getBytes("UTF-8");
+        final String str = Base64.getUrlEncoder().encodeToString(uuid.toString().getBytes("UTF-8"));
+        System.out.println(str);
+        System.out.println(uuid);
+        System.out.println(new String(Base64.getUrlDecoder().decode(str)));
 
-    public static void main(String[] args) throws Exception {
-        TestJWT testJWT = new TestJWT();
-
-        String jwt = testJWT.createToken();
-        System.out.println(jwt);
-
-        Map<String, Object> claimMap = testJWT.verifyJWT(jwt);
-        System.out.println(claimMap); // 토큰이 만료되었거나 문제가있으면 null
+        TestJWT jwt = new TestJWT();
 
     }
 
+
+    //암호화 키
+    private final String KEY = "cookit_Test_Secret_Key";
+
     //토큰 생성
-    public String createToken() throws Exception {
+    public String createAccessToken() throws Exception {
 
         //Header 부분 설정정
         Map<String, Object> headers = new HashMap<>();

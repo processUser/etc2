@@ -1,7 +1,7 @@
 package org.iptime.mpage;
 
-import org.iptime.mpage.user.model.UserDTO;
-import org.iptime.mpage.user.model.UserVo;
+import org.iptime.mpage.model.user.UserDTO;
+import org.iptime.mpage.model.user.UserVo;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;

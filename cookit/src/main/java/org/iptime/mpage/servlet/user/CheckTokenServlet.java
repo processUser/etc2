@@ -1,4 +1,4 @@
-package org.iptime.mpage.user;
+package org.iptime.mpage.servlet.user;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

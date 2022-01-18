@@ -1,10 +1,8 @@
 package org.iptime.mpage.DAO;
 
 import org.iptime.mpage.DbUtils;
-import org.iptime.mpage.Utils;
-import org.iptime.mpage.user.model.UserDTO;
-import org.iptime.mpage.user.model.UserVo;
-import org.mindrot.jbcrypt.BCrypt;
+import org.iptime.mpage.model.user.UserDTO;
+import org.iptime.mpage.model.user.UserVo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

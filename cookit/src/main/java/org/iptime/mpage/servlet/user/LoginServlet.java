@@ -1,13 +1,13 @@
-package org.iptime.mpage.user;
+package org.iptime.mpage.servlet.user;
 
 import com.google.gson.Gson;
 import org.iptime.mpage.Cookies;
 import org.iptime.mpage.DAO.UserDAO;
 import org.iptime.mpage.TestJWT;
 import org.iptime.mpage.Utils;
-import org.iptime.mpage.user.model.UserDTO;
-import org.iptime.mpage.user.model.UserResult;
-import org.iptime.mpage.user.model.UserVo;
+import org.iptime.mpage.model.user.UserDTO;
+import org.iptime.mpage.model.user.UserResult;
+import org.iptime.mpage.model.user.UserVo;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
@@ -18,8 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -41,43 +39,45 @@ public class LoginServlet extends HttpServlet {
         UserVo vo = UserDAO.loginUser(dto);
         int result = 0; // 로그인 실패 (아이디 비밀번호 확인 메세지)
         if(vo != null) {
-            if(Utils.checkPw(pw, vo)) {
+            if(BCrypt.checkpw(pw, vo.getPw())) {
                 // 로그인성공
                 result = Utils.setSession(req, vo); // 성공 1
             }
         }
 
-        //------------------------------------
-        UserResult us = new UserResult();
-        us.setResult(result);
-        if (result == 0) {
-            us.setMsg("아이디 비밀번호를 확인 하세요");
-        }
-
-
-
-        String resjson = gson.toJson(us);
-        System.out.println(gson.toJson(us));
-
-        res.setContentType("text/plain;charset=UTF-8");
-        res.setCharacterEncoding("UTF-8");
-        PrintWriter out = res.getWriter();
-        out.println(resjson);
         try {
             TestJWT testjwt = new TestJWT();
-            String jwt = testjwt.createToken();
+            String jwt = testjwt.createAccessToken();
             res.setHeader("Authorization", "Bearer "+jwt);
             System.out.println(jwt);
 
             //------------------------------------
             //cookie 저장
-            Cookies.setCookie(res, jwt);
+            //Cookies.setCookie(res, jwt);
             //------------------------------------
 
             //out.println();
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        //------------------------------------
+        UserResult ur = new UserResult();
+        ur.setResult(result);
+        if (result == 0) {
+            ur.setMsg("아이디 비밀번호를 확인 하세요");
+        }
+
+
+
+        String resjson = gson.toJson(ur);
+        System.out.println(gson.toJson(ur));
+
+        res.setContentType("text/plain;charset=UTF-8");
+        res.setCharacterEncoding("UTF-8");
+        PrintWriter out = res.getWriter();
+        out.println(resjson);
+
 
     }
 }

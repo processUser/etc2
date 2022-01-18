@@ -1,12 +1,11 @@
-package org.iptime.mpage.user;
+package org.iptime.mpage.servlet.user;
 
 import com.google.gson.Gson;
-import org.iptime.mpage.DAO.UserDAO;
 import org.iptime.mpage.Utils;
-import org.iptime.mpage.user.model.UserDTO;
-import org.iptime.mpage.user.model.UserResult;
+import org.iptime.mpage.model.user.UserDTO;
+import org.iptime.mpage.model.user.UserResult;
 
-import javax.servlet.*;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;

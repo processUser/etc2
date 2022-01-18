@@ -1,4 +1,4 @@
-{
+
     fetch('http://localhost:8090/goodslist',{
         'method': 'post',
         'headers': {'Content-Type': 'application/json'},
@@ -37,8 +37,8 @@
             pElem1.dataset.gnum = items.gnum;
             pElem2.innerText = items.price;
 
-            spanElem1.innerText = items.avgscore;
-            spanElem2.innerText = '리뷰 ' + items.countscore;
+            spanElem1.innerText = items.reviewvo.avgscore;
+            spanElem2.innerText = '리뷰 ' + items.reviewvo.countscore;
             spanElem2.style.marginLeft = '15px'
 
             listwarpElem.append(articleElem);
@@ -57,4 +57,3 @@
         }
         */
     }
-}

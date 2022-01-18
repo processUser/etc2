@@ -1,7 +1,8 @@
-package org.iptime.mpage.user.model;
+package org.iptime.mpage.model.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.iptime.mpage.model.user.UserEntity;
 
 @Getter
 @Setter
