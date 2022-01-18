@@ -6,8 +6,8 @@
    pw - 비밀번호
    nm - 이름
    gender - 성별 1- 남, 2- 여, 3- 선택안함
-   birthdaymm - 생일 (월) 01 ~ 09 값 중 입력가능
-   birthdaydd - 생일 (일) 01 ~ 31 값 중 입력가능
+   birthdaymm - 생일 (월) 00 ~ 09 값 중 입력가능, 00 은 선택 안한값
+   birthdaydd - 생일 (일) 00 ~ 31 값 중 입력가능, 00 은 선택 안한값
    rdt - 가입일
    ldt - 마지막 로그인 일
    joinpath - 회원가입 경로 0- 관리자 but 0 설정 막기,  1- 홈페이지, 2- 네이버, etc
@@ -20,8 +20,8 @@ CREATE TABLE cookit_user(
    pw VARCHAR(500) NOT NULL,
    nm VARCHAR(5) NOT NULL,
    gender TINYINT UNSIGNED NOT NULL CHECK(gender IN (1, 2, 3)),
-   birthdaymm VARCHAR(2) NOT NULL CHECK(birthdaymm >= 01 AND birthdaymm <= 09),
-   birthdaydd VARCHAR(2) NOT NULL CHECK(birthdaydd >= 01 AND birthdaydd <= 31),
+   birthdaymm VARCHAR(2) NOT NULL CHECK(birthdaymm >= 00 AND birthdaymm <= 09),
+   birthdaydd VARCHAR(2) NOT NULL CHECK(birthdaydd >= 00 AND birthdaydd <= 31),
    rdt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
    ldt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
    joinpath TINYINT UNSIGNED NOT NULL CHECK(joinpath >= 0),

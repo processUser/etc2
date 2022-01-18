@@ -15,7 +15,6 @@ public class CORSFilter implements Filter {  // cors 허용 js로 다른 주소 
         response.setHeader("Access-Control-Max-Age", "3600");
         //x-requested-with 는 ajax 요청이라는 의미
         response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Expose-Headers", "*, Authorization"); // 헤더에 임의의 값을 추가하기위해 사용했음..
 

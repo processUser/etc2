@@ -1,6 +1,7 @@
 package org.iptime.mpage.servlet.user;
 
 import com.google.gson.Gson;
+import org.iptime.mpage.DAO.UserDAO;
 import org.iptime.mpage.Utils;
 import org.iptime.mpage.model.user.UserDTO;
 import org.iptime.mpage.model.user.UserResult;
@@ -27,9 +28,9 @@ public class JoinServlet extends HttpServlet {
         UserDTO dto = gson.fromJson(json, UserDTO.class);
         Utils.hashPw(dto, dto.getPw());
 
-        //int result = UserDAO.insUser(dto);
+        int result = UserDAO.insUser(dto);
 
-        int result = 1;
+        //int result = 1;
 
         UserResult us = new UserResult();
         us.setResult(result);
