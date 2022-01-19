@@ -3,7 +3,8 @@
 const reg = {
     email: /^[0-9a-zA-Z]([_]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
     pw: /(?=.*\d{1,12})(?=.*[!@_]{1,12})(?=.*[a-zA-Z]{1,12}).{8,12}$/gm,
-    nm: /[가-힣]{2,5}/gm
+    nm: /[가-힣]{2,5}/gm,
+    dd: /^[0-9]{2}$/gm
 }
 
 window.onload = () => {
@@ -104,6 +105,50 @@ window.onload = () => {
                 divElem.remove();
         }
     });
+
+    //생일 월 선택시 -> 일 필수 입력
+    formElem.birthdaymm.addEventListener('blur', () => {
+        if(formElem.birthdaydd.value === ''){
+            if(!labelWrapElem[4].querySelector('.info')){
+                const divElem = document.createElement('div');
+                formElem.birthdaydd.classList.add('errBorder');
+                divElem.innerHTML = '"월" 선택시 "일"은 필수입니다.';
+                divElem.classList.add('info');
+                divElem.style.color = 'red'
+                labelWrapElem[4].append(divElem)
+            }
+        } else{
+            const divElem = labelWrapElem[4].querySelector('.info');
+            formElem.birthdaydd.classList.remove('errBorder');
+            if(divElem)
+                divElem.remove();
+        }
+        console.log(reg.dd.test(formElem.birthdaydd.value))
+    });
+
+    //생일 일 확인 
+    formElem.birthdaydd.addEventListener('blur', () => {
+        if(!reg.dd.test(formElem.birthdaydd.value)){
+            if(!labelWrapElem[4].querySelector('.err')){
+                const divElem = document.createElement('div');
+                formElem.birthdaydd.classList.add('errBorder');
+                divElem.innerHTML = '숫자 2자리 (ex. 01) ';
+                divElem.classList.add('err');
+                divElem.style.color = 'red'
+                labelWrapElem[4].append(divElem)
+            }
+        } else{
+            const divElem1 = labelWrapElem[4].querySelector('.err');
+            const divElem2 = labelWrapElem[4].querySelector('.info');
+            formElem.birthdaydd.classList.remove('errBorder');
+            if(divElem2 || divElem1){
+                divElem1.remove();
+                divElem2.remove();
+            }
+        }
+        console.log(reg.dd.test(formElem.birthdaydd.value))
+    });
+
     // 취소하기
     const backElem = document.querySelector('#back');
     backElem.addEventListener('click', ()=>{
@@ -121,7 +166,7 @@ window.onload = () => {
             login.email = formElem.email.value;
             login.upw = formElem.upw.value;
             login.nm = formElem.nm.value;
-            login.gender = formElem.gender.value; // 선택 안함
+            login.gender = formElem.gender.value === '' ? '03':formElem.gender.value; // 선택 안함
             login.birthdaymm = formElem.birthdaymm.value === '' ? '00':formElem.birthdaymm.value; // 기본값 00 
             login.birthdaydd = formElem.birthdaydd.value === '' ? '00':formElem.birthdaydd.value; // 기본값 00 
             login.joinpath = formElem.joinpath.value;

@@ -1,3 +1,12 @@
+SELECT A.goodspk, A.gnum, A.categorypk, A.gnm, A.price, A.quantity, A.rdt, B.categorynm AS category, AVG(revscore) AS avgscore, COUNT(revscore) AS countscore
+FROM cookit_goods A 
+LEFT JOIN cookit_goods_category B ON A.categorypk = B.categorypk 
+LEFT JOIN cookit_review C ON A.goodspk = C.goodspk
+WHERE A.categorypk
+GROUP BY goodspk
+ORDER BY price desc;
+
+
 INSERT INTO cookit_goods_category(categorynm) 
 VALUES
 ('매콤한맛'),
