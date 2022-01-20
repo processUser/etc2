@@ -5,6 +5,7 @@ import org.iptime.mpage.DAO.UserDAO;
 import org.iptime.mpage.Utils;
 import org.iptime.mpage.model.user.UserDTO;
 import org.iptime.mpage.model.user.UserResult;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -26,13 +27,25 @@ public class JoinServlet extends HttpServlet {
 
         Gson gson = new Gson();
         UserDTO dto = gson.fromJson(json, UserDTO.class);
-        Utils.hashPw(dto, dto.getPw());
+        String pw = dto.getPw();
 
-        int result = UserDAO.insUser(dto);
-
-        //int result = 1;
+        dto.setPw(BCrypt.hashpw(pw, BCrypt.gensalt())); // 비밀번호 암호화
 
         UserResult us = new UserResult();
+
+        int result = UserDAO.insAgree(dto.agree);
+
+        if(result == 1) {
+            result = UserDAO.insUser(dto);
+            if(result != 1) {
+                us.setMsg("회원가입에 실패하였습니다.");
+            }
+        } else {
+            result = 2; // 동의 실패.
+            us.setMsg("동의 절차에 문제가 발생했습니다.");
+        }
+
+
         us.setResult(result);
 
         System.out.println(gson.toJson(us));

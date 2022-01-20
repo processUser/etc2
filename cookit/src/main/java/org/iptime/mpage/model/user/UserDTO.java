@@ -8,5 +8,7 @@ import lombok.Setter;
 public class UserDTO extends UserEntity { // db 조회에 이용할 값을 담는 곳
     public String genderstr;
     public String birthday;
+    public String preUrl;
+    public AgreeEntity agree;
 
 }

@@ -1,3 +1,27 @@
+-- 동의 페이지
+/*
+	agreepk - 동의 pk
+	userpk - 회원 pk	
+	termsOfUse - 이용약관(필수 ) 0-  동의 x, 1- 동의 
+	userInformation - 개인정보 수집 및 이용(필수 ) 0-  동의 x, 1- 동의 
+	marketing - 마케팅등 정보 수신 등 활용(선택)
+	age - 14세 이상 확인(필수)
+	notRealpage - 실제 페이지 아니라는 것( 필수)
+	rdt - 첫 동의 일
+	mdt - 수정 일
+
+*/
+CREATE TABLE cookit_agree(
+	agreepk INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	userpk INT UNSIGNED NOT NULL,
+	termsOfUse TINYINT UNSIGNED NOT NULL CHECK(termsOfUse IN(0,1)),
+	userInformation TINYINT UNSIGNED NOT NULL CHECK(userInformation IN(0,1)),
+	marketing TINYINT UNSIGNED NOT NULL DEFAULT 0 CHECK(marketing IN(0,1)),
+	age TINYINT UNSIGNED NOT NULL CHECK(age IN(0,1)),
+	notRealpage TINYINT UNSIGNED NOT NULL CHECK(notRealpage IN(0,1)),
+	rdt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	mdt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP 
+);
 -- 사용자 테이블 
 /*
    회원정보 Db
@@ -27,6 +51,7 @@ CREATE TABLE cookit_user(
    joinpath TINYINT UNSIGNED NOT NULL CHECK(joinpath >= 0),
    deluser TINYINT UNSIGNED NOT NULL DEFAULT 0 CHECK(deluser >= 0 AND deluser <= 1)
 );
+
 -- 배송지 테이블
 /*
 	shipping address Db

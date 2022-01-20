@@ -57,9 +57,7 @@ public class Utils {
     public static void hashPw(UserDTO dto, String pw){
         dto.setPw(BCrypt.hashpw(pw, BCrypt.gensalt()));
     }
-    public static boolean checkPw(String pw, UserVo vo) {
-        return BCrypt.checkpw(pw, vo.getPw());
-    }
+
     //성별 정수
     public static void strTogender(UserDTO dto, String gender) {
         switch (gender){

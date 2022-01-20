@@ -1,6 +1,7 @@
 package org.iptime.mpage.DAO;
 
 import org.iptime.mpage.DbUtils;
+import org.iptime.mpage.model.user.AgreeEntity;
 import org.iptime.mpage.model.user.UserDTO;
 import org.iptime.mpage.model.user.UserVo;
 
@@ -9,6 +10,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UserDAO {
+    // 동의 항목
+    public static int insAgree(AgreeEntity entity){
+        Connection con = null;
+        PreparedStatement ps = null;
+        String sql = "insert into cookit_agree(userpk, termsOfUse, userInformation, marketing, age, notRealpage) " +
+                "values(?, ?, ?, ?, ?, ?)";
+
+        try {
+            con = DbUtils.getCon();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, entity.getUserpk());
+            ps.setInt(2, entity.getTermsOfUse());
+            ps.setInt(3, entity.getUserInformation());
+            ps.setInt(4, entity.getMarketing());
+            ps.setInt(5, entity.getAge());
+            ps.setInt(6, entity.getNotRealpage());
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(con,ps);
+        }
+        return 0;
+    }
     //회원가입
     public static int insUser(UserDTO dto){
         Connection con = null;

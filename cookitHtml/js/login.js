@@ -8,13 +8,16 @@ window.onload = () =>{
     });
     // 버튼 클릭시 json 객채 생성
     submitElem.addEventListener('click', (e) => { 
-        let login = new Object();
-        login.email = formElem.email.value;
-        login.pw = formElem.upw.value;
-        
-        let jsonLogin = JSON.stringify(login);
-        insLogin(jsonLogin)
-        e.preventDefault;
+        if(formElem.email.value && formElem.upw.value){
+            let login = new Object();
+            login.email = formElem.email.value;
+            login.pw = formElem.upw.value;
+            login.preUrl = document.referrer;
+
+            let jsonLogin = JSON.stringify(login);
+            insLogin(jsonLogin)
+            e.preventDefault;
+        }
     });
 
     // 홈페이지 로그인 처리 
@@ -28,11 +31,11 @@ window.onload = () =>{
             body: jsonLogin,
         }).then((response) => {
             console.log(response.headers.get('Authorization'))
-            // refresh token 가저오기
-            // ajax 는 document.cookie 가 안됨..
-            console.log('res - join - response.cookie : ' + response.headers.get('setcookie')) 
+            // // refresh token 가저오기
+            // // ajax 는 document.cookie 가 안됨..
+            // console.log('res - join - response.cookie : ' + response.headers.get('setcookie')) 
             accessToken(response.headers.get('Authorization'))
-            refreshToken()
+            // refreshToken()
             return response.json();
         }).then((data) => {
             //console.log(data);
@@ -46,11 +49,15 @@ window.onload = () =>{
 
     // 로그인 성공시 페이지 이동
     function goLogin(data) { //수정필!!
-        let joinUser = data
-        if(joinUser.result){
-            location.href ="/index.html"
+        let joinUser = data.result;
+
+        if(joinUser){
+            agreeCookie('ref', data.rjwt, '/', 14)
+            //location.href ="/main.html"
+        }else{
+            alert(data.msg);
+            formElem.email.focus();
         }
-        //console.log(joinUser.msg);
     }
 
     // JWT access token 가져오기
@@ -60,8 +67,20 @@ window.onload = () =>{
         var base64Payload = encodeURIComponent(tokens.split('.')[1]); //value 0 -> header, 1 -> payload, 2 -> VERIFY SIGNATURE 
         var payload = decodeURIComponent(escape(window.atob(base64Payload))); // 한글깨짐 해결 - https://developer.mozilla.org/en-US/docs/Glossary/Base64
         var result = JSON.parse(payload.toString()) 
-        //console.log(result);
+        console.log(result);
+
+        var date = new Date();
+        date.setTime(date.getTime() + (2 * 60 * 60 * 1000)); 
+        document.cookie = 'accessToken='+ payload.toString() +';path=/;expires='+ date;
         
+    }
+
+    //쿠키생성.
+    function agreeCookie(cKey, cName, cPath, day) {
+        var date = new Date();
+        date.setTime(date.getTime() + (day * 24 * 60 * 60 * 1000)); 
+        cookies = cKey +'='+ cName +';path='+ cPath +';expires='+ date;
+        document.cookie = cookies;
     }
 
     function refreshToken(token) {

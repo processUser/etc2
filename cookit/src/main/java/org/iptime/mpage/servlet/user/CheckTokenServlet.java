@@ -31,7 +31,7 @@ public class CheckTokenServlet extends HttpServlet {
         System.out.println("deserializeMap : " + deserializeMap);
         TestJWT testjwt = new TestJWT();
         try {
-            Map<String, Object> check = testjwt.verifyJWT((String) deserializeMap.get("token"));
+            Map<String, Object> check = testjwt.verifyJWT((String) deserializeMap.get("token"),"");
             System.out.println("check : " + check);
             System.out.println("deserializeMap.get(\"token\") : " + deserializeMap.get("token"));
 

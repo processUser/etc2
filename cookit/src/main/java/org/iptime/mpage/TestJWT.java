@@ -1,30 +1,19 @@
 package org.iptime.mpage;
 
 import io.jsonwebtoken.*;
+import org.iptime.mpage.model.user.UserVo;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 // TODO 어떻게 처리할지 고민필요
 // JWT 생성
 public class TestJWT {
-    public static void main(String[] args) throws java.io.UnsupportedEncodingException {
-        UUID uuid = UUID.randomUUID();
-        uuid.toString().getBytes("UTF-8");
-        final String str = Base64.getUrlEncoder().encodeToString(uuid.toString().getBytes("UTF-8"));
-        System.out.println(str);
-        System.out.println(uuid);
-        System.out.println(new String(Base64.getUrlDecoder().decode(str)));
-
-        TestJWT jwt = new TestJWT();
-
-    }
-
-
     //암호화 키
-    private final String KEY = "cookit_Test_Secret_Key";
+    //private String KEY = SecretKey.makeUuid();
 
     //토큰 생성
-    public String createAccessToken() throws Exception {
+    public String createAccessToken(UserVo vo, String key) throws Exception {
 
         //Header 부분 설정정
         Map<String, Object> headers = new HashMap<>();
@@ -34,9 +23,12 @@ public class TestJWT {
         //payload 부분 설정
         Map<String, Object> payloads = new HashMap<>();
         payloads.put("data", "My JWT");
-        payloads.put("nm", "고길동");
+        payloads.put("userpk", vo.getUserpk());
+        payloads.put("nm", vo.getNm());
+        payloads.put("email", vo.getEmail());
+        payloads.put("joinpath", vo.getJoinpath());
 
-        Long expiredTime = 1000 * 60L; // 1000 * 60L * 60L * 2L 토큰 유효 시간 (2시간)
+        Long expiredTime = 1000 * 60L * 60L * 2L; // 1000 * 60L * 60L * 2L 토큰 유효 시간 (2시간)
 
         Date ext = new Date(); // 토큰 만료 시간
         ext.setTime(ext.getTime() + expiredTime);
@@ -47,18 +39,49 @@ public class TestJWT {
                 .setClaims(payloads) // Claims 설정, Token에 담을 정보
                 .setSubject("user") // 토큰 용도, Token 제목
                 .setExpiration(ext) // 토큰 만료 시간 설정
-                .signWith(SignatureAlgorithm.HS256, KEY.getBytes("UTF-8")) // HS256과 Key로 Sign
+                .signWith(SignatureAlgorithm.HS256, key) // HS256과 Key로 Sign
+                .compact(); // 토큰 생성
+
+        return jwt;
+    }
+
+    public String createRefreshToken(int val, String path, String key) throws Exception {
+
+        //Header 부분 설정정
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("typ", "JWT");
+        headers.put("alg", "HS256");
+
+        //payload 부분 설정
+        Map<String, Object> payloads = new HashMap<>();
+        payloads.put("data", "My JWT");
+        payloads.put("Succeeded!", val);
+        payloads.put("url", path);
+
+
+        Long expiredTime = 1000 * 60L * 60L * 24L * 14L; // 1000 * 60L * 60L * 2L 토큰 유효 시간 (2시간)
+
+        Date ext = new Date(); // 토큰 만료 시간
+        ext.setTime(ext.getTime() + expiredTime);
+
+        // 토큰 Builder
+        String jwt = Jwts.builder()
+                .setHeader(headers) // Headers 설정
+                .setClaims(payloads) // Claims 설정, Token에 담을 정보
+                .setSubject("check") // 토큰 용도, Token 제목
+                .setExpiration(ext) // 토큰 만료 시간 설정
+                .signWith(SignatureAlgorithm.HS256, key) // HS256과 Key로 Sign
                 .compact(); // 토큰 생성
 
         return jwt;
     }
 
     //토큰 검증
-    public Map<String, Object> verifyJWT(String jwt) throws Exception {
+    public Map<String, Object> verifyJWT(String jwt, String key) throws Exception {
         Map<String, Object> claimMap = null;
         try {
             Claims claims = Jwts.parser()
-                    .setSigningKey(KEY.getBytes("UTF-8")) // Set Key
+                    .setSigningKey(key) // Set Key
                     .parseClaimsJws(jwt) // 파싱 및 검증, 실패 시 에러
                     .getBody();
 

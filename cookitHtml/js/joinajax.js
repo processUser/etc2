@@ -20,8 +20,17 @@ function insLogin(jsonLogin){
 
 // 성공시 로그인 페이지 이동
 function goLogin(data) {
-    if(data.result){
-        location.href ="/login.html"
+    switch(data.result){
+        case 1:
+            location.href ="/login.html"
+            break;
+        case 2:
+            alert(data.msg)
+            location.href ="/agreeJoin.html"
+            break;
+        default:
+            alert(data.msg)
+            break;
     }
     console.log(data);
 }

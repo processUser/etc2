@@ -10,7 +10,10 @@ const reg = {
 window.onload = () => {
     let formElem = document.querySelector('#formWarp');
     let labelWrapElem = formElem.querySelectorAll('.labelWrap');
-    //console.log(labelWrapElem)
+    //console.log();
+
+    const cookieValue = document.cookie.split('; ').find(row => row.startsWith('agree')).split('=')[1];
+    console.log(JSON.parse(decodeURI(cookieValue)));
 
     // 이메일 체크
     formElem.email.addEventListener('blur', () => {
@@ -164,12 +167,13 @@ window.onload = () => {
             console.log('click')
             let login = new Object();
             login.email = formElem.email.value;
-            login.upw = formElem.upw.value;
+            login.pw = formElem.upw.value;
             login.nm = formElem.nm.value;
             login.gender = formElem.gender.value === '' ? '03':formElem.gender.value; // 선택 안함
             login.birthdaymm = formElem.birthdaymm.value === '' ? '00':formElem.birthdaymm.value; // 기본값 00 
             login.birthdaydd = formElem.birthdaydd.value === '' ? '00':formElem.birthdaydd.value; // 기본값 00 
             login.joinpath = formElem.joinpath.value;
+            login.agree = JSON.parse(decodeURI(cookieValue));
             
             let jsonLogin = JSON.stringify(login);
             console.log(jsonLogin);
