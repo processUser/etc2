@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        var naver_id_login = new naver_id_login("k8cnRfEmk36R8WL53bbW", "http://127.0.0.1:5500/callback.html");
+        // 접근 토큰 값 출력
+        //alert(naver_id_login.oauthParams.access_token);
+        // 네이버 사용자 프로필 조회
+        naver_id_login.get_naver_userprofile("naverSignInCallback()");
+        // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+        let login = new Object();
+        function naverSignInCallback() {
+            login.email = naver_id_login.getProfileData('email')
+            login.nm = naver_id_login.getProfileData('name');
+            login.genderstr = naver_id_login.getProfileData('gender');
+            login.birthday = naver_id_login.getProfileData('birthday');
+            login.joinpath = 2; //로그인 경로 네이버
+                
+            let jsonLogin = JSON.stringify(login);
+            console.log(jsonLogin);
+            insLogin(jsonLogin)
+    
+        }
+    
+        function insLogin(jsonLogin){
+            let url = "http://localhost:8100/snslogin"    
+            fetch(url,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: jsonLogin,
+            }).then((res) => {
+                return res.json();
+            }).then((data) => {
+                console.log(data);
+                windowClose(data)
+            }).catch((e) => {
+                console.log(e);
+            })
+        }
+    
+        function windowClose(data){
+            if(data.result === 1){
+                window.opener.location.href = "/main";
+                self.close();
+    
+            }
+        }
+    </script>
+</body>
+</html>

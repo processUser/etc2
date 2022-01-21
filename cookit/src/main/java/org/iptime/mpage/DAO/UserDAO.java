@@ -64,12 +64,22 @@ public class UserDAO {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        String sql = "select userpk, email, pw, nm, joinpath from cookit_user where email = ?";
+        String sql = "select userpk, email, pw, nm, joinpath, ukey from cookit_user where ";
+                if(dto.getEmail() != null){
+                    sql += "email = ?";
+                }else {
+                    sql += "userpk = ?";
+                }
 
         try {
             con = DbUtils.getCon();
             ps = con.prepareStatement(sql);
-            ps.setString(1, dto.getEmail());
+            if(dto.getEmail() != null){
+                ps.setString(1, dto.getEmail());
+            }else {
+                ps.setInt(1, dto.getUserpk());
+            }
+
             rs = ps.executeQuery();
 
             if(rs.next()) {
@@ -79,6 +89,7 @@ public class UserDAO {
                 vo.setPw(rs.getString("pw"));
                 vo.setNm(rs.getString("nm"));
                 vo.setJoinpath(rs.getInt("joinpath"));
+                vo.setUkey(rs.getString("ukey"));
 
                 return vo;
 
@@ -117,5 +128,26 @@ public class UserDAO {
             DbUtils.close(con,ps,rs);
         }
         return true;
+    }
+
+    public static int updKey(UserVo vo, String key){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = "UPDATE cookit_user SET ukey = ? WHERE userpk = ?;";
+
+        try {
+            con = DbUtils.getCon();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, key);
+            ps.setInt(2, vo.getUserpk());
+            return ps.executeUpdate();
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(con,ps,rs);
+        }
+        return 0;
     }
 }

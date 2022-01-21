@@ -16,5 +16,6 @@ public class UserEntity { //DB와 1:1 매핑
     public String rdt; // 가입일
     public String ldt; // 마지막 로그인
     public int joinpath; //로그인 경로 (0,1-홈페이지,2-naver,3-kakao,,,etc)
+    public String ukey;
     public int deluser; //삭제여부
 }

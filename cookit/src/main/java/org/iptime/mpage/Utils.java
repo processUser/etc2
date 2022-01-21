@@ -4,7 +4,9 @@ import org.iptime.mpage.model.user.UserDTO;
 import org.iptime.mpage.model.user.UserVo;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -79,5 +81,9 @@ public class Utils {
         HttpSession session = req.getSession();
         session.setAttribute("loginUser", vo);
         return 1;
+    }
+
+    public static void disForward(HttpServletRequest req, HttpServletResponse res, String jsp) throws ServletException, IOException{
+        req.getRequestDispatcher("/WEB-INF/view/"+jsp+".html").forward(req, res);
     }
 }

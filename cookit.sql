@@ -36,6 +36,7 @@ CREATE TABLE cookit_agree(
    ldt - 마지막 로그인 일
    joinpath - 회원가입 경로 0- 관리자 but 0 설정 막기,  1- 홈페이지, 2- 네이버, etc
               지정 경로 이외의 값 ex) 0 이 넘어오면 가입 거절
+   ukey - uuid 저장값 refreshtoken 키에 사용.
    deluser - 삭제여부 정상유지- 0, 삭제- 1 
 */
 CREATE TABLE cookit_user(
@@ -49,6 +50,7 @@ CREATE TABLE cookit_user(
    rdt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
    ldt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
    joinpath TINYINT UNSIGNED NOT NULL CHECK(joinpath >= 0),
+   ukey VARCHAR(2) NOT NULL DEFAULT '',
    deluser TINYINT UNSIGNED NOT NULL DEFAULT 0 CHECK(deluser >= 0 AND deluser <= 1)
 );
 

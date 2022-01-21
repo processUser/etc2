@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 public class JoinServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Utils.disForward(request, response, "user/join");
 
     }
 

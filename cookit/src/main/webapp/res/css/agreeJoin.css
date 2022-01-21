@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
+}
+
+/*  */
+#content{
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 8fr 1fr;
+    justify-content: center;
+}
+/* 헤더 */
+#header{
+    margin-top: 80px;
+    padding: 65px 15px;
+}
+#header h1{
+    color: #BDD61A;
+    font-size: 65px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+}
+/* 세션 */
+#section{
+    padding: 65px 15px;
+}
+.checkboxWarp:not(:first-child, :last-child){
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.checkboxWarp:last-child{
+    margin-top: 20px;
+}
+label{
+    display: block;
+    font-size: 20px;
+}
+
+label > input{
+    width: 30px;
+    height: 15px;
+}
+label:hover, input:hover{
+    cursor: pointer;
+}
+.allText{
+    margin-top: 10px;
+    margin-left: 30px;
+    font-size: 15px;
+    color: #b3b3b3;
+}
+.checkboxWarp > div:hover{
+    border-bottom: 1px solid #000;
+    cursor: pointer; /* 마우스 커서 모양 변형*/
+}
+.btnWrap{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.btnWrap input{
+    padding: 5px 20px;
+    width: 150px;
+    height: 45px;
+    background-color: #BDD61A;
+    border: 0;
+    font-size: 22px;
+}
+.btnWrap input:not(:first-child){
+    margin-left: 40px;
+}
+/* 푸터 */
+#footer{
+   
+}

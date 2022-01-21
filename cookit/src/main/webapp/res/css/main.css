@@ -1,0 +1,582 @@
+.w1200{
+    width: 1180px;
+    margin: 0 auto;
+    border: 1px solid blue;
+}
+.white{
+    color: #fff;
+}
+.black{
+    color: black;
+}
+.backWhite{
+    background-color: #fff;
+}
+.backBlack{
+    background-color: #000;
+}
+.zIndex{
+    z-index: 1;
+}
+/* 슬라이더 */
+.slideWrap{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 640px;
+}
+
+/* slide */
+.slide{
+    display: flex;
+    width: 800%;
+    /* margin-left: -11418px; */
+}
+.slide li{
+    width: 100%;
+    height: 640px;
+    background-repeat: no-repeat;
+}
+.slide li > div{
+    width: 100%;
+}
+.slide li > div div.w1200{
+    position: relative;
+
+}
+.slide li div div.w1200 > a{
+    top: 55px;
+    display: block;
+    width: 500px;
+    padding: 15px 0;
+}
+
+
+.slide li div div.w1200 a p.slideF{
+    width: 150px;
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 22px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 40px;
+}
+.slide li div div.w1200 a p.slideS{
+    margin-top: 25px;
+    width: 500px;
+    font-size: 55px;
+    text-transform: uppercase;
+}
+.slide li div div.w1200 a p.slideS span{
+    font-size: 45px;
+}
+.slide li div div.w1200 a p.slideT{
+    margin-top: 20px;
+    width: 450px;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+.slide li div div.w1200 a div.slideI{
+    margin-top: 25px;
+}
+.slide li div div.w1200 a div.slideI P{
+    float: left;
+    font-size: 22px;
+}
+.slideI p:first-child::before{
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    /* border: 1px solid; */
+    background: url(/res/img/common/img_main.png) no-repeat ;
+    background-position: -565px -30px;
+    background-size: 820px 800px;
+}
+.slideI p:last-child::before{
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    margin-left: 30px;
+    background: url(/res/img/common/img_main.png) no-repeat ;
+    background-position: -595px -30px;
+    background-size: 820px 800px;
+}
+.slide li div div.w1200 div.slideP{
+    top: 380px;
+    font-size: 45px;
+}
+.slide li div div.w1200 div.slideP p{
+    display: inline-block;
+}
+.slide li div div.w1200 div.slideP a{}
+.slide li div div.w1200 div.slideP a::before{
+    content: "";
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background: url(/res/img/common/img_main.png) no-repeat ;
+    background-position: -610px -73px;
+    background-size: 800px 800px;
+}
+
+
+/* 좌우버튼 */
+.btnLR{
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50px);
+}
+.btnLR ul{
+    position: relative;
+}
+.btnLR ul .left{
+    left: -60px;
+}
+.btnLR ul .left a{}
+.btnLR ul .left a::before{
+    content: "";
+    display: block;
+    width: 60px;
+    height: 75px;
+    background: url(/res/img/common/img_main.png) no-repeat ;
+    background-position: 0px -460px;
+    background-size: 820px 800px;
+
+}
+.btnLR ul .right{
+    right: -60px;
+}
+.btnLR ul .right a{}
+.btnLR ul .right a::before{
+    content: "";
+    display: block;
+    width: 60px;
+    height: 75px;
+    background: url(/res/img/common/img_main.png) no-repeat ;
+    background-position: -70px -460px;
+    background-size: 820px 800px;
+
+}
+
+/* 슬라이더 정지버튼 */
+.btnStop{
+    bottom: 60px;
+    width: 100%;
+}
+.btnStop > div > div{
+    display: inline-block;
+    padding: 5px 20px;
+    border-radius: 25px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.btnStop div div .slideNum{
+    color: #fff;
+    font-size: 18px;
+    margin-right: 10px;
+
+}
+.btnStop div div a::before{
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(/res/img/common/img_main.png) no-repeat ;
+    background-position: -445px -395px;
+    background-size: 860px 840px;
+}
+
+/* 배송정보 */
+.section2{
+    margin-top: 65px;
+    height: 150px;
+}
+.section2 article{
+    float: left;
+    width: 490px;
+    padding: 20px 30px;
+    border: 1px solid blue;
+    background: #f2f2f2;
+}
+.section2 article:not(:first-child){
+    margin-left: 64px;
+}
+.section2 article p:nth-of-type(1){
+    font-size: 22px;
+    font-weight: 800;
+}
+.section2 article p:nth-of-type(2){
+    margin-top: 10px;
+}
+.section2 article p:nth-of-type(3){
+    margin-top: 20px;
+}
+
+/* 추천메뉴 */
+.section3{
+    overflow: hidden;
+    position: relative;
+    margin-top: 60px;
+    height: 520px;
+}
+.section3 > div{
+    position: relative;
+    width: 350px;
+    margin-top: 35px;
+    border: 1px solid blue;
+
+}
+.section3 > div > ul{
+    overflow: hidden;
+    position: absolute;
+    display: inline-block;
+    border-bottom: 3px solid black;
+    width: 200px;
+    height: 55px;
+    z-index: 1;
+}
+.section3 > div > ul::after{
+    content: "";
+    position: absolute;
+    top: 35px;
+    left: 140px;
+    width: 15px;
+    height: 15px;
+    margin-left: 35px;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+.section3 > div > ul li{
+    font-size: 35px;
+    font-weight: 800;
+    background-color: #fff;
+}
+.section3 > div > div{
+    position: absolute;
+    top: 80px;
+}
+.section3 > div > div h2{
+    font-size: 45px;
+    font-weight: normal;
+}
+.section3 > div > div p{
+    margin-top: 20px;
+    font-size: 15px;
+    color: #b9b9b9;
+}
+.section3 > div > div ul{
+    margin-top: 30px;
+}
+.section3 > div > div ul li{
+    float: left;
+}
+.section3 > div > div ul li a{}
+.section3 > div > div ul li a::before{
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url(/res/img/common/ico_set.png) no-repeat ;
+    background-size: 800px 800px;
+}
+.section3 > div > div ul li:first-child a::before{
+    background-position: -540px 0;
+}
+.section3 > div > div ul li:nth-of-type(2){
+    margin: 0 20px;
+    font-size: 20px;
+}
+.section3 > div > div ul li:last-child a::before{
+    background-position: -565px 0;
+
+}
+.section3 article{
+    position: absolute;
+    top: 0;
+    left: 350px;
+
+}
+.section3 article ul{}
+.section3 article ul li{
+    float: left;
+    display: flex;
+    align-items: center;
+    border: 1px solid blue;
+}
+.section3 article ul li > a{}
+.section3 article ul li > a img{
+    width: 100%;
+    height: 520px;
+}
+.section3 article ul li > div{
+    width: 270px;
+}
+.section3 article ul li > div p:first-child{
+    font-size: 20px;
+    font-weight: 800;
+}
+.section3 article ul li > div p:last-child{
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #b9b9b9;
+}
+.section3 article ul li > div p:last-child span:first-child{
+    font-size: 30px;
+    color: #000;
+}
+.section3 article ul li > div p:last-child a{}
+.section3 article ul li > div p:last-child a::before{
+    content: "";
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background: url(/res/img/common/img_main.png) no-repeat ;
+    background-position: -610px -73px;
+    background-size: 800px 800px;
+}
+
+/* 광고/이벤트 */
+.aside{
+    position: relative;
+    margin-top: 40px;
+}
+.aside > ul{
+    display: flex;
+
+}
+.aside > ul li{
+    width: 100%;
+}
+.aside > ul li a{}
+.aside > ul li a img{}
+.aside > div{
+    position: absolute;
+    bottom: 30px;
+    left: 370px;
+}
+.aside > div ul{
+    width: 75px;
+    height: 15px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.aside > div ul li{
+    float: left;
+}
+.aside > div ul li a{}
+.aside > div ul li a::before{
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: url(/res/img/common/img_main.png) no-repeat ;
+    background-size: 800px 800px;
+}
+.aside > div ul li:first-child{}
+.aside > div ul li:first-child a{}
+.aside > div ul li:first-child a::before{
+    background-position: -487px -325px;
+
+}
+.aside > div ul li:nth-of-type(2){}
+.aside > div ul li:nth-of-type(2) div{
+    float: left;
+}
+.aside > div ul li:nth-of-type(2) div a::before{
+    background-position: -537px -325px;
+}
+.aside > div ul li:nth-of-type(2) div.choose a::before{
+    background-position: -561px -325px;
+}
+.aside > div ul li:last-child{}
+.aside > div ul li:last-child a{}
+.aside > div ul li:last-child a::before{
+    background-position: -513px -325px;
+}
+
+/* 베스트 상품 */
+.section4{
+    margin-top: 120px;
+}
+.section4 h2{
+    font-size: 40px;
+    font-weight: 800;
+}
+.section4 article{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    justify-content: space-between;
+    margin-top: 40px;
+}
+.marginTop80{
+    margin-top: 80px;
+}
+.section4 article > div{}
+.section4 article > div div:first-child{}
+.section4 article > div div:last-child{
+    position: relative;
+    margin-top: 20px;
+}
+.section4 article > div div:last-child a:first-child{
+    font-size: 18px;
+    font-weight: 800;
+}
+.a{
+    font-size: 16px;
+    color: #adadad;
+}
+.section4 article > div div:last-child a:first-child p:first-child{}
+.section4 article > div div:last-child a:first-child p:last-child{}
+.section4 article > div div:last-child a:last-child{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.section4 article > div div:last-child a:last-child::before{
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url(/res/img/common/ico_set.png) no-repeat;
+    background-position: -45px -190px;;
+    background-size: 800px 800px;
+}
+
+/* 월간소식 */
+.section5{
+    margin-top: 160px;
+}
+.section5 > div:first-child{}
+.section5 > div:last-child{}
+.section5 > div:last-child a{
+    display: flex;
+    background-color: #f8f8f8;
+}
+.section5 > div:last-child a > div{
+    padding: 20px 40px 0;
+}
+.section5 > div:last-child > a > div > p:nth-of-type(1){
+    font-size: 24px;
+    font-weight: 800;
+}
+.section5 > div:last-child > a > div > p:nth-of-type(1) span{
+    margin-right: 15px;
+    padding: 5px 20px;
+    border-radius: 30px;
+    background-color: #bfd918;
+    font-size: 17px
+}
+.section5 > div:last-child > a > div > p:nth-of-type(2){
+    margin-top: 20px;
+    font-size: 18px;
+    color: #7e7e7e;
+}
+.section5 > div:last-child > a > div > p:nth-of-type(3){
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+.section5 > div:last-child > a > div > p:nth-of-type(3) > span{
+    color: red;
+    text-decoration: underline;
+}
+.section5 > div:last-child > a > div > div{
+    display: flex;
+    flex-direction: row;
+}
+.section5 > div:last-child > a > div > div div{
+    width: 180px;
+}
+.section5 > div:last-child > a > div > div div:not(:first-child){
+    margin-left: 20px;
+}
+.section5 > div:last-child > a > div > div > div p:nth-of-type(1){
+    margin: 5px 0;
+    font-size: 18px;
+    font-weight: 800;
+}
+.section5 > div:last-child > a > div > div > div p:last-child{
+    font-size: 16px;
+    color: #7e7e7e;
+}
+
+/* 메뉴(?) */
+.section7{
+    margin-top: 160px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: space-between;
+
+}
+.section7 article{
+    width: 100%;
+
+}
+.section7 .article7_1 > img{}
+.section7 .article7_1 div{}
+.section7 .article7_1 div p{}
+.p7_1{
+    margin: 20px 0;
+    font-size: 40px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.p7_2, .p7_3{
+    font-size: 18px;
+    color: #808080;
+}
+.p7_2 span{
+    color: #242424;
+    font-weight: bold;
+}
+.section7 .article7_1 dl{
+    display: grid;
+    grid-template-columns: 130px auto;
+    margin-top: 30px;
+    border-top: 1px solid #cccccc;
+}
+.section7 .article7_1 dl dt{
+    box-sizing: border-box;
+    height: 133px;
+    border-bottom: 1px solid #cccccc;
+
+}
+.section7 .article7_1 dl dt a{}
+.section7 .article7_1 dl dt a img{
+    background-color: #f8f8f8;
+}
+.section7 .article7_1 dl dd{
+    position: relative;
+    padding: 30px 20px;    
+    border-bottom: 1px solid #cccccc;
+}
+.section7 .article7_1 dl dd a:first-child{
+    font-size: 18px;
+    font-weight: 800;
+}
+.a{
+    font-size: 16px;
+    color: #adadad;
+}
+.section7 .article7_1 dl dd a:last-child{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.section7 .article7_1 dl dd a:last-child::before{
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: url(/res/img/common/ico_set.png) no-repeat;
+    background-position: -45px -190px;;
+    background-size: 800px 800px;
+}

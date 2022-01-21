@@ -1,0 +1,254 @@
+/* 초기화 */
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+li{
+    list-style: none;
+}
+
+html, body{
+    min-width: 1180px;
+    height: 100%;
+}
+/* 중복 */
+.hide{
+    display: block;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+}
+.po_absolute{
+    position: absolute;    
+}
+.space-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 70px;
+}
+.line::before{
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.4);
+    margin:0 15px;
+}
+
+/* .gnb */
+.header{}
+.header .gnb{
+    height: 30px;
+    background: #000;
+}
+.header .gnb ul{
+    padding: 5px 70px 0 0;
+    float: right;
+}
+.header .gnb ul li{
+    float: left;
+}
+.header .gnb ul li a{
+    color: #fff;
+    font-size: 12px;
+}
+
+
+/* 로고 */
+.header > div {
+    height: 80px;
+    border-bottom:  1px solid #000;
+}
+.header .logoWrap{}
+.header .logoWrap a{}
+.header .logoWrap a::before{
+    content: "";
+    display: block;
+    width: 120px;
+    height: 40px;
+    background: url(/res/img/common/ico_set.png) no-repeat ;
+    background-position: -320px -380px;
+    background-size: 820px 800px;
+}
+.header .logoWrap a h1{
+    
+}
+
+/* lnb */
+.header .lnb{}
+.header .lnb ul li{
+    float: left;
+}
+.header .lnb ul li:not(:first-child){
+    margin-left: 70px;
+}
+.header .lnb ul li a{
+    font-size: 25px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+/* myMenu */
+.header .my_menu{}
+.header .my_menu li{
+    float: left;
+}
+
+.header .my_menu li a{
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+
+}
+.header .my_menu li a::before{
+    content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-left: 2px;
+    background: url(/res/img/common/ico_set.png) no-repeat;
+    background-size: 800px 800px;
+
+}
+.header .my_menu .bag a::before{
+    background-position: -580px -315px;
+}
+.header .my_menu .found a::before{
+    background-position: -620px -315px;
+
+}
+
+/* 로고 lnb myMenu  */
+.header .my_menu li:not(:first-child){
+    margin-left: 40px;
+}
+
+
+/* 푸터 */
+.footer{
+    position: relative;
+    height: 250px;
+    align-items: flex-start;
+    padding-top: 30px;
+    background-color: #202020;
+}
+.footer .footerLogoWrap::before{
+    content: "";
+    display: block;
+    width: 180px;
+    height: 50px;
+    background: url(/res/img/common/ico_set.png) no-repeat -320px -320px;
+    background-size: 820px 800px;
+}
+.footer .footerC{}
+.footer .footerC ul{}
+.footer .footerC ul li{
+    float: left;
+}
+.footer .footerC ul li a{
+    font-size: 14px;
+    font-weight: 800;
+    color: #e2e2e2;
+}
+.footer .footerC div{
+    clear: both;
+    padding-top: 20px;
+    font-size: 22px;
+    color: #e2e2e2;
+}
+
+.footer .footerl{
+    display: flex;
+    flex-direction: column;
+}
+.footer .footerl a{
+    position: relative;
+    color: #e2e2e2;
+    font-weight: 800;
+}
+.footer .footerl a:first-child{
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+.micon::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid #e2e2e2;
+    border-bottom: 2px solid #e2e2e2;
+}
+.iconB::after{
+    margin-top: -18px;
+    transform: rotate(-45deg);
+}
+.iconT::after{
+    margin-top: -12px;
+    transform: rotate(135deg);
+}
+
+/* 빠른이동 */
+.quickMenu{
+    position: fixed;
+    bottom: 70px;
+    right: 150px;
+}
+.quickMenu a{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+/* cj그룹계열사 */
+.cjGroup{
+    position: absolute;
+    left: 0;
+    bottom: 280px;
+    width: 100%;
+    background-color: #f2f2f2;
+}
+.cjGroup > ul{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 40px;
+}
+.cjGroup > ul > li{
+    font-weight: 800;
+}
+.cjGroup > ul > li:not(:first-child){
+    margin-left: 30px;
+}
+.cjGroup > ul > li > ul{padding-top: 10px;}
+.cjGroup > ul > li > ul > li{}
+.cjGroup > ul > li > ul > li:not(:first-child){
+    margin-top: 10px;
+}
+.cjGroup > ul > li > ul > li > a{
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: normal;
+    color: #3f3f3f;
+
+}
+
+/* section{
+    overflow: hidden;
+    width: 0;
+    height: 0;
+} */

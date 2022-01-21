@@ -1,0 +1,41 @@
+.section{
+    width: 1180px;
+    min-height: 85%;
+    margin: 60px auto 30px;
+    border: 1px dotted blue;
+}
+.section > h2 {
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #BDD61A;
+}
+.section > div{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.section > div p{
+    margin-left: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.section > div ul{
+    display: flex;
+    margin-right: 20px;
+    font-size: 22px;
+    font-weight: bold;
+
+}
+.lineb::before{
+    height: 15px;
+    background-color: black;
+}
+#listwarp{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 268px);
+    justify-content: space-around;
+}
+#listwarp article{
+    margin-bottom: 25px;
+}
