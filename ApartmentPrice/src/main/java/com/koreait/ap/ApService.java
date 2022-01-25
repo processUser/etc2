@@ -36,8 +36,10 @@ public class ApService {
     public Object selApartmentInfo(SearchDto dto) {
         ApartmentInfoEntity entity2 = mapper.selApartmentInfo(dto);
         if(entity2 == null){
+            System.out.println("------------------------getdata------------------------");
            return getData(dto);
         } else {
+            System.out.println("------------------------seldata------------------------");
             return mapper.selApartmentList(dto);
         }
     }
@@ -76,6 +78,7 @@ public class ApService {
             for (ApartmentInfoEntity item: list) {
                 item.setLocationcode(incode.getIn_code());
                 System.out.println("item" + item);
+                item.setDealamount(item.getDealamount().replaceAll(",",""));
                 //TODO instert
                 mapper.insApartData(item);
             }

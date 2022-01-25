@@ -6,9 +6,12 @@
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3308/apartment"/>
-        <property name="username" value="root"/>
-        <property name="password" value="koreait"/>
+<!--        <property name="jdbcUrl" value="jdbc:mysql://localhost:3308/apartment"/>-->
+<!--        <property name="username" value="root"/>-->
+<!--        <property name="password" value="koreait"/>-->
+        <property name="jdbcUrl" value="jdbc:mysql://mpage.iptime.org:3306/apartment"/>
+        <property name="username" value="test"/>
+        <property name="password" value="test"/>
     </bean>
 
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
